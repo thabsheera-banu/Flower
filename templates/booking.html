@@ -1,0 +1,116 @@
+
+{% load static %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+    <style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: pink;
+}
+.container {
+    padding: 50px;
+  background-color: lightblue;
+}
+
+input[type=text], input[type=number], textarea {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 10px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: orange;
+  outline: none;
+}
+ div {
+            padding: 10px 0;
+         }
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<form>
+    {% csrf_token %}
+  <div class="container">
+  <center>  <h1> Booking</h1> </center>
+  <hr>
+  <label> Name </label>
+<input type="text" name="firstname" placeholder= "name" size="10" required />
+<label> Address: </label>
+<input type="text" name="lastname" placeholder="address" size="15"required />
+
+<label> Phone: </label>
+<input type="text" name="username" placeholder="phone" size="15"required />
+
+
+ <label for="email"><b>Email</b></label>
+ <input type="text" placeholder="Enter Email" name="email" required>
+
+       <p><b>District : </b>
+         <select name="district" class="form-control">
+   {% for branch in branch %}
+            <option value="{{ branch.id }}">{{ branch.Bname}}</option>
+   {% endfor %}
+         </select>
+</p>
+
+          <p><b>Branch : </b>
+         <select name="branch" class="form-control">
+   {% for branch in branch %}
+            <option value="{{ branch.id}}">{{ branch.SubBranch1}}</option>
+             <option value="{{ branch.id}}">{{ branch.SubBranch2}}</option>
+
+   {% endfor %}
+         </select>
+</p>
+
+       <p><b>Flower : </b>
+         <select name="flower" class="form-control">
+   {% for flower in showflower %}
+            <option value="{{ flower.id}}">{{ flower.name}}-{{flower.price}}</option>
+   {% endfor %}
+         </select>
+</p>
+
+           Quantity:<input type="number" name="quantity" size="15" required /><br>
+
+<!--           <a class="btn btn-secondary" href="{% url 'booking:conform' %}">Submit</a>-->
+    <a class="btn btn-warning" href="{% url 'booking:conform' %}"  >Book Now</a>
+          <a class="btn btn-warning" href="{% url 'shop:demo' %}"  >Back </a>
+
+
+
+<!--    <button type="submit" class="registerbtn" value="{% url 'booking:conform' %}"   >Book Now</button>-->
+</form>
+
+</html>
+{% endblock %}

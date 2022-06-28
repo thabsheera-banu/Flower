@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="description" content="{% block metadescription %}{% endblock %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+    <title>{% block title %}{% endblock %}</title>
+
+
+</head>
+
+<body>
+<!--<body id="bg" style="background-image:url('{% static 'img/bg.jpg' %}'); background-repeat:no-repeat;background-size:auto;background-attachment: fixed;">-->
+<!-- Home -->
+
+<!--	<div class="home">-->
+<!--		<div class="background_image" style="background-image:url({% static 'img/bg.jpg' %})"></div>-->
+<!--	</div>-->
+
+<div class="container">
+
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+<div class="card">
+    <img src="{% static 'img/bg.jpg' %}" alt="fwl" class="mx-auto d-block img-fluid card-img-top">
+    <div class="card-img-overlay">
+        <h1 class="card-title text-dark mt-1">fresh flower</h1>
+                {% block content %}
+
+        <a href="{% url 'login' %}" class="btn btn-dark text-white">shop now</a>
+        {% endblock %}
+
+    </div>
+</div>
+    {% for i in flower_list %}
+    <img src="{{i.img.url}}" width="100" height="100">
+        {{i.name}}----->{{i.price}}
+    {% endfor %}
+<!--<div class=" text-center">-->
+<!--<div class="col-md-6">-->
+<!--        <a class="btn btn-danger" href="{% url 'login' %}">shop here..</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+{% include 'footer.html' %}
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}" ></script>
+
+
+
+</body>
+</html>
